@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/MarkOfLark/rust_snippets.png)](https://travis-ci.org/MarkOfLark/rust_snippets)
+[![Build Status](https://travis-ci.com/MarkOfLark/rust_snippets.svg?branch=master)](https://travis-ci.com/MarkOfLark/rust_snippets.svg?branch=master)
