@@ -1,0 +1,5 @@
+[book]
+authors = ["Mark E. McDermott"]
+multilingual = false
+src = "src"
+title = "Rust Snippets"
