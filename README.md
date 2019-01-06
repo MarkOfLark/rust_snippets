@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/MarkOfLark/rust_snippets.png)](https://travis-ci.org/MarkOfLark/rust_snippets)
