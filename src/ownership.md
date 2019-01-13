@@ -1,7 +1,29 @@
-# Chapter 1
-# mdBook-specific markdown
+# Ownership
+## Prevent use after free errors
 
-## Hiding code lines
+* Ownership rules enforced by compiler
+  1. TODO Each value in Rust has a variable that's called its owner.
+  2. There can only be one owner at a time.
+  3. When the owner goes out of scope, the value will be dropped.
+* C++ has RAII and smart pointer
+  * Not as strong as Rust because these are opt-in and still require the programmer to do the right thing.
+  * Not enforced at compile time.
+
+
+```rust
+// This function takes ownership of greeting
+fn greet_with(greeting: String)
+{
+    println!("{}",greeting);
+}
+
+fn main() {
+   let greeting = String::from("Hello, world!");
+   greet_with(greeting); // Greeting is moved right here
+
+   println!("The greeting was: {}!", greeting);
+}
+```
 
 There is a feature in mdBook that lets you hide code lines by prepending them
 with a `#`.
