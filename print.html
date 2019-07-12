@@ -1,0 +1,796 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust Snippets</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li><a href="rust_programming_language.html"><strong aria-hidden="true">1.</strong> Rust Progamming Language</a></li><li><a href="ownership.html"><strong aria-hidden="true">2.</strong> Ownership</a></li><li><a href="borrowing.html"><strong aria-hidden="true">3.</strong> Borrowing</a></li><li><a href="interior_mutability.html"><strong aria-hidden="true">4.</strong> Interior Mutability</a></li><li><a href="thread_synchronization.html"><strong aria-hidden="true">5.</strong> Thread Synchronization</a></li><li><a href="traits/intro.html"><strong aria-hidden="true">6.</strong> Traits</a></li><li><ol class="section"><li><a href="traits/traits_as_interfaces.html"><strong aria-hidden="true">6.1.</strong> Interfaces</a></li><li><a href="traits/dynamic_dispatch.html"><strong aria-hidden="true">6.2.</strong> Dynamic Dispatch</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust Snippets</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#the-rust-programming-language" id="the-rust-programming-language">The Rust Programming Language</a></h1>
+<h2><a class="header" href="#pursuing-the-trifecta-of-safety-speed-and-concurrency" id="pursuing-the-trifecta-of-safety-speed-and-concurrency">Pursuing the trifecta of Safety, Speed, and Concurrency</a></h2>
+<ul>
+<li>Started by Mozilla Research around 2010</li>
+<li>First stable releas in 2015</li>
+<li>2018 edition released Dec 1018</li>
+<li>&quot;Most Loved Language&quot; Stack Overflow Survey: 2016,2017,2018</li>
+<li>Many organization using Rust in production
+<ul>
+<li>Dropbox</li>
+<li>Slack</li>
+<li>Atlassian</li>
+<li>npm</li>
+<li>CHEF</li>
+<li>Mozilla</li>
+<li>Samsung</li>
+<li>Canonical</li>
+<li>Cloudfare</li>
+</ul>
+</li>
+</ul>
+<h1><a class="header" href="#mdbook-specific-markdown" id="mdbook-specific-markdown">mdBook-specific markdown</a></h1>
+<h2><a class="header" href="#hiding-code-lines" id="hiding-code-lines">Hiding code lines</a></h2>
+<p>There is a feature in mdBook that lets you hide code lines by prepending them
+with a <code>#</code>.</p>
+<pre><code class="language-bash"># fn main() {
+    let x = 5;
+    let y = 6;
+
+    println!(&quot;{}&quot;, x + y);
+# }
+</code></pre>
+<p>Will render as</p>
+<pre><pre class="playpen"><code class="language-rust"># fn main() {
+    let x = 5;
+    let y = 7;
+
+    println!(&quot;{}&quot;, x + y);
+# }
+</code></pre></pre>
+<h2><a class="header" href="#including-files" id="including-files">Including files</a></h2>
+<p>With the following syntax, you can include files into your book:</p>
+<pre><code class="language-hbs">{{#include file.rs}}
+</code></pre>
+<p>The path to the file has to be relative from the current source file.</p>
+<p>Usually, this command is used for including code snippets and examples. In this
+case, oftens one would include a specific part of the file e.g. which only
+contains the relevant lines for the example. We support four different modes of
+partial includes:</p>
+<pre><code class="language-hbs">{{#include file.rs:2}}
+{{#include file.rs::10}}
+{{#include file.rs:2:}}
+{{#include file.rs:2:10}}
+</code></pre>
+<p>The first command only includes the second line from file <code>file.rs</code>. The second
+command includes all lines up to line 10, i.e. the lines from 11 till the end of
+the file are omitted. The third command includes all lines from line 2, i.e. the
+first line is omitted. The last command includes the excerpt of <code>file.rs</code>
+consisting of lines 2 to 10.</p>
+<h2><a class="header" href="#inserting-runnable-rust-files" id="inserting-runnable-rust-files">Inserting runnable Rust files</a></h2>
+<p>With the following syntax, you can insert runnable Rust files into your book:</p>
+<pre><code class="language-hbs">{{#playpen file.rs}}
+</code></pre>
+<p>The path to the Rust file has to be relative from the current source file.</p>
+<p>When play is clicked, the code snippet will be sent to the <a href="https://play.rust-lang.org/">Rust Playpen</a> to be
+compiled and run. The result is sent back and displayed directly underneath the
+code.</p>
+<p>Here is what a rendered code snippet looks like:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    println!(&quot;Hello World!&quot;);
+#
+#    // You can even hide lines! :D
+#   println!(&quot;I am hidden! Expand the code snippet to see me&quot;);
+}
+</code></pre></pre>
+<h1><a class="header" href="#ownership" id="ownership">Ownership</a></h1>
+<h2><a class="header" href="#prevent-use-after-free-errors" id="prevent-use-after-free-errors">Prevent use after free errors</a></h2>
+<ul>
+<li>Ownership rules enforced by compiler
+<ol>
+<li>TODO Each value in Rust has a variable that's called its owner.</li>
+<li>There can only be one owner at a time.</li>
+<li>When the owner goes out of scope, the value will be dropped.</li>
+</ol>
+</li>
+<li>C++ has RAII and smart pointer
+<ul>
+<li>Not as strong as Rust because these are opt-in and still require the programmer to do the right thing.</li>
+<li>Not enforced at compile time.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-rust ignore does_not_compile">// This function takes ownership of greeting
+fn greet_with(greeting: String)
+{
+    println!(&quot;{}&quot;,greeting);
+}
+
+fn main() {
+   let greeting = String::from(&quot;Hello, world!&quot;);
+   greet_with(greeting); // Greeting is moved right here
+
+   println!(&quot;The greeting was: {}!&quot;, greeting);
+}
+</code></pre>
+<p>There is a feature in mdBook that lets you hide code lines by prepending them
+with a <code>#</code>.</p>
+<pre><code class="language-bash"># fn main() {
+    let x = 5;
+    let y = 6;
+
+    println!(&quot;{}&quot;, x + y);
+# }
+</code></pre>
+<p>Will render as</p>
+<pre><pre class="playpen"><code class="language-rust"># fn main() {
+    let x = 5;
+    let y = 7;
+
+    println!(&quot;{}&quot;, x + y);
+# }
+</code></pre></pre>
+<h2><a class="header" href="#including-files-1" id="including-files-1">Including files</a></h2>
+<p>With the following syntax, you can include files into your book:</p>
+<pre><code class="language-hbs">{{#include file.rs}}
+</code></pre>
+<p>The path to the file has to be relative from the current source file.</p>
+<p>Usually, this command is used for including code snippets and examples. In this
+case, oftens one would include a specific part of the file e.g. which only
+contains the relevant lines for the example. We support four different modes of
+partial includes:</p>
+<pre><code class="language-hbs">{{#include file.rs:2}}
+{{#include file.rs::10}}
+{{#include file.rs:2:}}
+{{#include file.rs:2:10}}
+</code></pre>
+<p>The first command only includes the second line from file <code>file.rs</code>. The second
+command includes all lines up to line 10, i.e. the lines from 11 till the end of
+the file are omitted. The third command includes all lines from line 2, i.e. the
+first line is omitted. The last command includes the excerpt of <code>file.rs</code>
+consisting of lines 2 to 10.</p>
+<h2><a class="header" href="#inserting-runnable-rust-files-1" id="inserting-runnable-rust-files-1">Inserting runnable Rust files</a></h2>
+<p>With the following syntax, you can insert runnable Rust files into your book:</p>
+<pre><code class="language-hbs">{{#playpen file.rs}}
+</code></pre>
+<p>The path to the Rust file has to be relative from the current source file.</p>
+<p>When play is clicked, the code snippet will be sent to the <a href="https://play.rust-lang.org/">Rust Playpen</a> to be
+compiled and run. The result is sent back and displayed directly underneath the
+code.</p>
+<p>Here is what a rendered code snippet looks like:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    println!(&quot;Hello World!&quot;);
+#
+#    // You can even hide lines! :D
+#   println!(&quot;I am hidden! Expand the code snippet to see me&quot;);
+}
+</code></pre></pre>
+<h1><a class="header" href="#borrowing" id="borrowing">Borrowing</a></h1>
+<h2><a class="header" href="#prevents-data-races-at-compile-time" id="prevents-data-races-at-compile-time">Prevents data races at compile time</a></h2>
+<ul>
+<li>A data rate occurs when these conditions are true
+<ol>
+<li>Two or more pointers access the same data at the same time</li>
+<li>At least one of the pointers is being used to write to the data.</li>
+<li>There is no mechanism being used to synchronize access to the data.</li>
+</ol>
+</li>
+<li>Borrowing rules are enforced by the Rust compiler
+<ol>
+<li>At any given time, you can have either (but not both of) one mutable reference or any number of immutable references.</li>
+<li>Reference but always be valid</li>
+</ol>
+</li>
+<li>Synchronization between threads follow from this rule.</li>
+</ul>
+<pre><code class="language-rust ignore does_not_compile">fn dangle() -&gt; &amp;String {
+    let s = String::from(&quot;hello&quot;);
+    &amp;s
+}
+
+fn main() {
+    let reference_to_nothing = dangle();
+}
+</code></pre>
+<h2><a class="header" href="#hiding-code-lines-1" id="hiding-code-lines-1">Hiding code lines</a></h2>
+<p>There is a feature in mdBook that lets you hide code lines by prepending them
+with a <code>#</code>.</p>
+<pre><code class="language-bash"># fn main() {
+    let x = 5;
+    let y = 6;
+
+    println!(&quot;{}&quot;, x + y);
+# }
+</code></pre>
+<p>Will render as</p>
+<pre><pre class="playpen"><code class="language-rust"># fn main() {
+    let x = 5;
+    let y = 7;
+
+    println!(&quot;{}&quot;, x + y);
+# }
+</code></pre></pre>
+<h2><a class="header" href="#including-files-2" id="including-files-2">Including files</a></h2>
+<p>With the following syntax, you can include files into your book:</p>
+<pre><code class="language-hbs">{{#include file.rs}}
+</code></pre>
+<p>The path to the file has to be relative from the current source file.</p>
+<p>Usually, this command is used for including code snippets and examples. In this
+case, oftens one would include a specific part of the file e.g. which only
+contains the relevant lines for the example. We support four different modes of
+partial includes:</p>
+<pre><code class="language-hbs">{{#include file.rs:2}}
+{{#include file.rs::10}}
+{{#include file.rs:2:}}
+{{#include file.rs:2:10}}
+</code></pre>
+<p>The first command only includes the second line from file <code>file.rs</code>. The second
+command includes all lines up to line 10, i.e. the lines from 11 till the end of
+the file are omitted. The third command includes all lines from line 2, i.e. the
+first line is omitted. The last command includes the excerpt of <code>file.rs</code>
+consisting of lines 2 to 10.</p>
+<h2><a class="header" href="#inserting-runnable-rust-files-2" id="inserting-runnable-rust-files-2">Inserting runnable Rust files</a></h2>
+<p>With the following syntax, you can insert runnable Rust files into your book:</p>
+<pre><code class="language-hbs">{{#playpen file.rs}}
+</code></pre>
+<p>The path to the Rust file has to be relative from the current source file.</p>
+<p>When play is clicked, the code snippet will be sent to the <a href="https://play.rust-lang.org/">Rust Playpen</a> to be
+compiled and run. The result is sent back and displayed directly underneath the
+code.</p>
+<p>Here is what a rendered code snippet looks like:</p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    println!(&quot;Hello World!&quot;);
+#
+#    // You can even hide lines! :D
+#   println!(&quot;I am hidden! Expand the code snippet to see me&quot;);
+}
+</code></pre></pre>
+<h1><a class="header" href="#interior-mutability" id="interior-mutability">Interior Mutability</a></h1>
+<h1><a class="header" href="#thread-synchronization" id="thread-synchronization">Thread Synchronization</a></h1>
+<h2><a class="header" href="#basic-implementation" id="basic-implementation">Basic implementation</a></h2>
+<p>Does not compile</p>
+<ul>
+<li>Mutex is a smart pointer that wraps the internal reference with a mutex and manages the locking/unlocking.</li>
+<li>Fails because mutex does not implement 'Copy' (bit level copy)</li>
+<li>We need something to allow multiple ownership</li>
+</ul>
+<pre><code class="language-rust ignore does_not_compile">use std::sync::Mutex;
+use std::thread;
+
+fn main() {
+    let counter = Mutex::new(0);
+    let mut handles = vec![];
+
+    let handle = thread::spawn(move || {
+        let mut num = counter.lock().unwrap();
+
+        *num += 1;
+    });
+    handles.push(handle);
+
+    let handle2 = thread::spawn(move || {
+        let mut num2 = counter.lock().unwrap();
+
+        *num2 += 1;
+    });
+    handles.push(handle2);
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!(&quot;Result: {}&quot;, *counter.lock().unwrap());
+}
+</code></pre>
+<h2><a class="header" href="#reference-counting" id="reference-counting">Reference Counting</a></h2>
+<p>This still does not compile because Rc does not implement <code>Send</code> (types that can be shared between threads)</p>
+<pre><code class="language-rust ignore does_not_compile">use std::rc::Rc;
+use std::sync::Mutex;
+use std::thread;
+
+fn main() {
+    let counter = Rc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Rc::clone(&amp;counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!(&quot;Result: {}&quot;, *counter.lock().unwrap());
+}
+</code></pre>
+<h2><a class="header" href="#atomically-counting-references" id="atomically-counting-references">Atomically counting references</a></h2>
+<p>Arc is a shared pointer type works atomically so it does implement 'Send' and also 'Copy'</p>
+<pre><pre class="playpen"><code class="language-rust">use std::sync::{Mutex,Arc};
+use std::thread;
+
+fn main() {
+    let counter = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let counter = Arc::clone(&amp;counter);
+        let handle = thread::spawn(move || {
+            let mut num = counter.lock().unwrap();
+
+            *num += 1;
+        });
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!(&quot;Result: {}&quot;, *counter.lock().unwrap());
+}
+</code></pre></pre>
+<p>Does not prevent deadlock</p>
+<h1><a class="header" href="#traits" id="traits">Traits</a></h1>
+<h1><a class="header" href="#traits-1" id="traits-1">Traits</a></h1>
+<h2><a class="header" href="#traits-as-interfaces" id="traits-as-interfaces">Traits as Interfaces</a></h2>
+<p>Traits are similar to interfaces in other languages.</p>
+<p>HOW ARE TRAITS DIFFERENT?</p>
+<h2><a class="header" href="#implement-traits-from-different-modules" id="implement-traits-from-different-modules">Implement Traits From Different Modules</a></h2>
+<pre><pre class="playpen"><code class="language-rust">struct Point2d
+{
+    x: f32,
+    y: f32,
+}
+
+
+
+impl Point2d
+{
+    fn distance_to(&amp;self, other: &amp;Point2d) -&gt; f32 {
+        ((self.x - other.x).powf(2.0) + (self.y - other.y).powf(2.0)).sqrt()
+    }
+}
+
+fn main() {
+    let p1 = Point2d{ x:-1.0, y: 2.0 };
+    let p2 = Point2d{ x: 0.0, y: 3.0 };
+
+    println!(&quot;{}&quot;, p1.distance_to(&amp;p2));
+}
+</code></pre></pre>
+<p>But what could we do to make this more flexible? Implement the distance function for a trait that serves as the interface to a type.</p>
+<pre><code class="language-rust ignore does_not_compile">#struct Point2d
+#{
+#    x: f32,
+#    y: f32,
+#}
+
+trait ToPoint2d {
+    fn to_point_2d(&amp;self) -&gt; &amp;Point2d;
+}
+
+impl ToPoint2d for Point2d {
+    fn to_point_2d(&amp;self) -&gt; &amp;Point2d {
+        self
+    }
+}
+
+impl Point2d
+{
+    fn distance_to&lt;P: ToPoint2d&gt;(&amp;self, other: &amp;P) -&gt; f32 {
+        let other2d = other.to_point_2d();
+        ((self.x - other2d.x).powf(2.0) + (self.y - other2d.y).powf(2.0)).sqrt()
+    }
+}
+
+#fn main() {
+#    let p1 = Point2d{ x:-1.0, y: 2.0 };
+#    let p2 = Point2d{ x: 0.0, y: 3.0 };
+#
+#    println!(&quot;{}&quot;, p1.distance_to(&amp;p2));
+#}
+</code></pre>
+<p>Now we can implement the trait on any other type (even from different modules) and still use the distance function has before.</p>
+<pre><code class="language-rust ignore does_not_compile">##[derive(Clone)]
+#struct Point2d
+#{
+#    x: f32,
+#    y: f32,
+#}
+#
+#trait ToPoint2d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d;
+#}
+#
+#impl ToPoint2d for Point2d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d {
+#        (*self).clone()
+#    }
+#}
+#
+#impl Point2d
+#{
+#    fn distance_to&lt;P: ToPoint2d&gt;(&amp;self, other: &amp;P) -&gt; f32 {
+#        let other2d = other.to_point_2d();
+#        ((self.x - other2d.x).powf(2.0) + (self.y - other2d.y).powf(2.0)).sqrt()
+#    }
+#}
+#
+struct Point3d
+{
+    x: f32,
+    y: f32,
+    z: f32,
+}
+
+impl ToPoint2d for Point3d {
+    fn to_point_2d(&amp;self) -&gt; Point2d {
+        Point2d{ x: self.x, y: self.y }
+    }
+}
+
+fn main() {
+    let p1 = Point2d{ x:-1.0, y: 2.0 };
+    let p2 = Point3d{ x: 0.0, y: 3.0, z: -1.0 };
+
+    println!(&quot;{}&quot;, p1.distance_to(&amp;p2));
+}
+</code></pre>
+<p>But this is only half the story because if we call it the other way around it doesn't compile.</p>
+<pre><code class="language-rust ignore does_not_compile">##[derive(Clone)]
+#struct Point2d
+#{
+#    x: f32,
+#    y: f32,
+#}
+#
+#trait ToPoint2d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d;
+#}
+#
+#impl ToPoint2d for Point2d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d {
+#        (*self).clone()
+#    }
+#}
+#
+#impl Point2d
+#{
+#    fn distance_to&lt;P: ToPoint2d&gt;(&amp;self, other: &amp;P) -&gt; f32 {
+#        let other2d = other.to_point_2d();
+#        ((self.x - other2d.x).powf(2.0) + (self.y - other2d.y).powf(2.0)).sqrt()
+#    }
+#}
+#
+#struct Point3d
+#{
+#    x: f32,
+#    y: f32,
+#    z: f32,
+#}
+#
+#impl ToPoint2d for Point3d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d {
+#        Point2d{ x: self.x, y: self.y }
+#    }
+#}
+#
+fn main() {
+    let p1 = Point2d{ x:-1.0, y: 2.0 };
+    let p2 = Point3d{ x: 0.0, y: 3.0, z: -1.0 };
+
+    println!(&quot;{}&quot;, p2.distance_to(&amp;p1));
+}
+</code></pre>
+<p>Lets fix that...</p>
+<pre><code class="language-rust ignore does_not_compile">##[derive(Clone)]
+#struct Point2d
+#{
+#    x: f32,
+#    y: f32,
+#}
+#
+#trait ToPoint2d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d;
+#
+#    fn distance_to&lt;P: ToPoint2d&gt;(&amp;self, other: &amp;P) -&gt; f32 {
+#        let a = other.to_point_2d();
+#        let b = self.to_point_2d();
+#        ((a.x - b.x).powf(2.0) + (a.y - b.y).powf(2.0)).sqrt()
+#    }
+#}
+#
+#impl ToPoint2d for Point2d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d {
+#        (*self).clone()
+#    }
+#}
+#
+#impl Point2d
+#{
+#    fn distance_to&lt;P: ToPoint2d&gt;(&amp;self, other: &amp;P) -&gt; f32 {
+#        let other2d = other.to_point_2d();
+#        ((self.x - other2d.x).powf(2.0) + (self.y - other2d.y).powf(2.0)).sqrt()
+#    }
+#}
+#
+#struct Point3d
+#{
+#    x: f32,
+#    y: f32,
+#    z: f32,
+#}
+#
+#impl ToPoint2d for Point3d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d {
+#        Point2d{ x: self.x, y: self.y }
+#    }
+#}
+#
+fn main() {
+    let p1 = Point2d{ x:-1.0, y: 2.0 };
+    let p2 = Point3d{ x: 0.0, y: 3.0, z: -1.0 };
+
+    println!(&quot;{}&quot;, p2.distance_to(&amp;p1));
+}
+</code></pre>
+<p>Now lets implement our trait for the built in tuple type.</p>
+<pre><code class="language-rust ignore does_not_compile">##[derive(Clone)]
+#struct Point2d
+#{
+#    x: f32,
+#    y: f32,
+#}
+#
+#trait ToPoint2d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d;
+#
+#    fn distance_to&lt;P: ToPoint2d&gt;(&amp;self, other: &amp;P) -&gt; f32 {
+#        let a = other.to_point_2d();
+#        let b = self.to_point_2d();
+#        ((a.x - b.x).powf(2.0) + (a.y - b.y).powf(2.0)).sqrt()
+#    }
+#}
+#
+#impl ToPoint2d for Point2d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d {
+#        (*self).clone()
+#    }
+#}
+#
+#impl Point2d
+#{
+#    fn distance_to&lt;P: ToPoint2d&gt;(&amp;self, other: &amp;P) -&gt; f32 {
+#        let other2d = other.to_point_2d();
+#        ((self.x - other2d.x).powf(2.0) + (self.y - other2d.y).powf(2.0)).sqrt()
+#    }
+#}
+#
+#struct Point3d
+#{
+#    x: f32,
+#    y: f32,
+#    z: f32,
+#}
+#
+#impl ToPoint2d for Point3d {
+#    fn to_point_2d(&amp;self) -&gt; Point2d {
+#        Point2d{ x: self.x, y: self.y }
+#    }
+#}
+#
+impl ToPoint2d for (f32,f32) {
+    fn to_point_2d(&amp;self) -&gt; Point2d {
+        match self {
+            (x,y) =&gt; Point2d{ x: *x, y: *y}
+        }
+    }
+}
+
+fn main() {
+    let p1 = Point2d{ x:-1.0, y: 2.0 };
+    let p2 = Point3d{ x: 0.0, y: 3.0, z: -1.0 };
+    
+    println!(&quot;{}&quot;, p1.distance_to(&amp;(0.0,3.0)));
+    println!(&quot;{}&quot;, (-1.0,2.0).distance_to(&amp;p2));
+}
+</code></pre>
+<h1><a class="header" href="#traits-2" id="traits-2">Traits</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
