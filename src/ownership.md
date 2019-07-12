@@ -10,7 +10,7 @@
   * Not enforced at compile time.
 
 
-```rust
+```rust,ignore,does_not_compile
 // This function takes ownership of greeting
 fn greet_with(greeting: String)
 {
