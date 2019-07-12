@@ -32,7 +32,7 @@ fn main() {
 
 But what could we do to make this more flexible? Implement the distance function for a trait that serves as the interface to a type.
 
-```rust
+```rust,ignore,does_not_compile
 #struct Point2d
 #{
 #    x: f32,
@@ -67,7 +67,7 @@ impl Point2d
 
 Now we can implement the trait on any other type (even from different modules) and still use the distance function has before.
 
-```rust
+```rust,ignore,does_not_compile
 ##[derive(Clone)]
 #struct Point2d
 #{
@@ -116,7 +116,7 @@ fn main() {
 
 But this is only half the story because if we call it the other way around it doesn't compile.
 
-```rust
+```rust,ignore,does_not_compile
 ##[derive(Clone)]
 #struct Point2d
 #{
@@ -165,7 +165,7 @@ fn main() {
 
 Lets fix that...
 
-```rust
+```rust,ignore,does_not_compile
 ##[derive(Clone)]
 #struct Point2d
 #{
@@ -220,7 +220,7 @@ fn main() {
 
 Now lets implement our trait for the built in tuple type.
 
-```rust
+```rust,ignore,does_not_compile
 ##[derive(Clone)]
 #struct Point2d
 #{

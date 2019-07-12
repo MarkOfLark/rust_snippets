@@ -10,7 +10,7 @@
   2. Reference but always be valid
 * Synchronization between threads follow from this rule.
 
-```rust
+```rust,ignore,does_not_compile
 fn dangle() -> &String {
     let s = String::from("hello");
     &s

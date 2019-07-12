@@ -5,7 +5,7 @@ Does not compile
 * Mutex is a smart pointer that wraps the internal reference with a mutex and manages the locking/unlocking.
 * Fails because mutex does not implement 'Copy' (bit level copy)
 * We need something to allow multiple ownership
-```rust
+```rust,ignore,does_not_compile
 use std::sync::Mutex;
 use std::thread;
 
@@ -37,7 +37,7 @@ fn main() {
 
 ## Reference Counting
 This still does not compile because Rc does not implement `Send` (types that can be shared between threads)
-```rust
+```rust,ignore,does_not_compile
 use std::rc::Rc;
 use std::sync::Mutex;
 use std::thread;
